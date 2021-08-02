@@ -1,0 +1,16 @@
+name: Azure Login
+
+on:
+  push:
+    branches:  master 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build the site in the azure login
+      uses: azure/login@v1
+      with: 
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
