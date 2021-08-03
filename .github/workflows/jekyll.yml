@@ -11,6 +11,6 @@ jobs:
 
     steps:
     - name: Build with jekyll
-    - uses:  helaili/jekyll-action@v2
-      with:
-        credentials: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses:  actions/checkout@v2
+    - uses: kshehadeh/jekyll-s3-action@220371747871b9aa1b635fb30a57693891e37982
+    - uses: kshehadeh/jekyll-s3-action@0.1
