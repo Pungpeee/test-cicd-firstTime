@@ -46,4 +46,3 @@ jobs:
       name: docker run
     - run: | 
         - docker run -d -p 80:80 nginx:alpine
-        image: 'Dokerfile'
