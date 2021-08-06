@@ -30,7 +30,7 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       steps:
-       - uses: ./
+       - uses: actions/checkout@v1
          name: executing remote ssh commands using ssh key
          with: 
           hosts: ${{ secrets.HOST }}
