@@ -30,21 +30,24 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       steps:
-       - uses: actions/checkout@v1
-         name: executing remote ssh commands using ssh key
-         with: 
-          hosts: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          script: whoami
-          command: |
-             cd test-cicd-firstTime         
+       - uses: docker/build-push-action@v2
+         name: docker build-run
+       - run: |
+           docker build -t nginx:alpine .
+           docker run -d -p 80:80 nginx:alpine        
         
   deploy:
     needs: non-deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: docker/build-push-action@v2
-    - run: |
-        using: 'docker'
-        image: 'Dockerfile'
+    - uses: JimCronqvist/action-ssh@master
+      name: Deploy execute command ssh to remote server
+      with:
+       hosts: ${{ secrets.HOST }}
+       publicKey: ${{ secrets.SSH_PUBLIC_KEY }}
+       privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+       command: |
+          pwd
+          ls -la
+
+
