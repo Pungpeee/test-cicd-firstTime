@@ -34,7 +34,6 @@ jobs:
          name: executing remote ssh commands using ssh key
          with: 
           hosts: ${{ secrets.HOST }}
-          publicKey: ${{ secrets.SSH_PUBLIC_KEY }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           script: whoami
