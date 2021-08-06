@@ -32,10 +32,10 @@ jobs:
       steps:
        - uses: docker/build-push-action@v2
          name: docker build-run
-       - run: |
-           pwd Dockerfile
-           docker build -t nginx:alpine -f ./Dockerfile .
-           docker run -d -p 80:80 nginx:alpine
+         with: 
+           command:
+              docker build -t nginx:alpine -f ./Dockerfile .
+              docker run -d -p 80:80 nginx:alpine
         
   deploy:
     needs: non-deploy
