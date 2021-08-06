@@ -45,7 +45,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: docker/build-push-action@v2
-      name: docker run
-    - run: | 
-         docker build -t nginx:alpine .
-         docker run -d -p 80:80 nginx:alpine
+    - run: |
+        using: 'docker'
+        image: 'Dockerfile'
