@@ -33,9 +33,9 @@ jobs:
        - uses: docker/build-push-action@v2
          name: docker build-run
        - run: |
-           cd /home/runner/work/test-cicd-firstTime/test-cicd-firstTime/Dockerfile
+           cd .
            pwd Dockerfile
-           docker build -t nginx:alpine .
+           docker build -t nginx:alpine -f ./Dockerfile .
            docker run -d -p 80:80 nginx:alpine
         
   deploy:
