@@ -43,9 +43,10 @@ jobs:
       - uses: appleboy/ssh-action@master
         name: Login and Deploy execute command ssh to remote server
         with:
-         hosts: ${{ secrets.HOST }}
+         host: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
+         port: 22
          script: |
             ls -la
 
