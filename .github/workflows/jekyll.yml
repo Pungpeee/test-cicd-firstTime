@@ -5,28 +5,6 @@ on:
     branches:  master 
 
 jobs:
-#   configlogin:
-#     runs-on: ubuntu-latest
-    
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-    
-#     - name: Build the site in the jekyll/builder container
-#       run: |
-#         docker run \
-#         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-#         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
-      
-#     - name: Login to Docker hub
-#       uses: docker/login-action@v1
-#       with:
-#         name: pungpeeecicd/repository
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
-
-
-      
   build:
       runs-on: ubuntu-latest
       steps:
@@ -36,11 +14,11 @@ jobs:
       - name: Set env
         run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
       
-#       - uses: docker/build-push-action@v2
-#         name: docker build-run
-#         with: 
-#           command:
-#             docker build -t nginx:alpine -f ./Dockerfile .
+      - uses: docker/build-push-action@v2
+        name: docker build-run
+        with: 
+          command:
+            docker build -t nginx:alpine -f ./Dockerfile .
             
       - name: Login to Github Docker Registry
         uses: docker/login-action@v1
