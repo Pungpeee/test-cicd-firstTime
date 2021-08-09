@@ -18,7 +18,7 @@ jobs:
         name: docker build-run
         with: 
           script:
-            cd test-cicd-firstTime
+            cd test-cicd-firsttime
             docker build -t nginx:alpine -f ./Dockerfile .
             
       - name: Login to Github Docker Registry
@@ -49,6 +49,6 @@ jobs:
          password: ${{ secrets.PASSWORD }}
          script: |
             ls -la
-            docker pull ghcr.io/pungpeee/test-cicd-firstTime
-            docker run -d -p 80:80 test-cicd-firstTime
+            docker pull ghcr.io/pungpeee/test-cicd-firsttime
+            docker run -d -p 80:80 test-cicd-firsttime
   
