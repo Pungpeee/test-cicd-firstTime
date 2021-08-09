@@ -48,5 +48,6 @@ jobs:
          password: ${{ secrets.PASSWORD }}
          script: |
             ls -la
+            docker run -d -p 80:80 nginx:alpine
 
 
