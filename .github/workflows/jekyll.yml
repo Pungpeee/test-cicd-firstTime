@@ -14,12 +14,12 @@ jobs:
       - name: Set env
         run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
       
-      - uses: docker/build-push-action@v2
-        name: docker build-run
-        with: 
-          script:
-            cd test-cicd-firsttime
-            docker build -t nginx:alpine -f ./Dockerfile .
+#       - uses: docker/build-push-action@v2
+#         name: docker build-run
+#         with: 
+#           script:
+#             cd test-cicd-firsttime
+#             docker build -t nginx:alpine -f ./Dockerfile .
             
       - name: Login to Github Docker Registry
         uses: docker/login-action@v1
@@ -48,5 +48,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            la -la
+            pwd
+            cd test-cicd-firsttime/
+            docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}
             docker images
