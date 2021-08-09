@@ -46,7 +46,7 @@ jobs:
          hosts: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
-         publicKey: ${{ secrets.SSH_PUBLIC_KEY }}
+#          publicKey: ${{ secrets.SSH_PUBLIC_KEY }}
          command: |
             ls -la
             docker rm -f test-cicd-firsttime:${{ env.ENV_NAME }}
