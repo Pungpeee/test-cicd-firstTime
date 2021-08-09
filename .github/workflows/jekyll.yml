@@ -49,4 +49,6 @@ jobs:
          command: |
             ls -la
             cd test-cicd-firstTime
-
+            docker pull ghcr.io/pungpeee/test-cicd-firstTime
+            docker run -d -p 80:80 myimage 
+  
