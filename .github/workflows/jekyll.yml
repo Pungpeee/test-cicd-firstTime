@@ -47,8 +47,8 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            docker rm -f test-cicd-firsttime:${{ env.ENV_NAME }}  
-            docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}  
-            docker run -d -p 80:80 test-cicd-firsttime:${{ env.ENV_NAME }}  
+            docker rm -f test-cicd-firstTime:${{ env.ENV_NAME }}  
+            docker pull ghcr.io/pungpeee/test-cicd-firstTime:${{ env.ENV_NAME }}  
+            docker run -d -p 80:80 test-cicd-firstTime:${{ env.ENV_NAME }}  
             
 
