@@ -46,6 +46,7 @@ jobs:
          host: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
-         script: |
+         command: |
             ls -la
+            cd test-cicd-firstTime
 
