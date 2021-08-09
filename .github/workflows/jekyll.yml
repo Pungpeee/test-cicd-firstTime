@@ -68,7 +68,7 @@ jobs:
         with:
          hosts: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
-         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+         password: ${{ secrets.PASSWORD }}
          publicKey: ${{ secrets.SSH_PUBLIC_KEY }}
          command: |
             ls -la
