@@ -31,12 +31,18 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
+          file: ./Dockerfile
           push: true
-          tags: ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}          
-          script: | 
-             cd test-cicd-firsttime/
-             docker images
+          tags: ghcr.io/pungpeee/test-cicd-firsttime         
               
+
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
       - name: Login and Deploy execute command ssh to remote server
         uses: appleboy/ssh-action@master
         with:
@@ -45,18 +51,7 @@ jobs:
          password: ${{ secrets.PASSWORD }}
          script: |
             pwd
-            docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}
+            docker pull ghcr.io/pungpeee/test-cicd-firsttime
             docker images
-            docker run -p 80:80 test-cicd-firsttime:${{ env.ENV_NAME }}
+            docker run -p 80:80 test-cicd-firsttime
             docker ps -a
-#   deploy:
-#       needs: build
-#       runs-on: ubuntu-latest
-#       steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-      
-#       - name: Set env
-#         run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
-
-
