@@ -39,6 +39,8 @@ jobs:
       steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set env
+        run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
       
       - name: Login and Deploy execute command ssh to remote server
         uses: appleboy/ssh-action@master
@@ -47,7 +49,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            docker images  
             docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}  
+            docker images
             docker run -d -p 80:80 ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }} 
             docker ps -a
