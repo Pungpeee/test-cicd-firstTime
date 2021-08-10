@@ -49,5 +49,5 @@ jobs:
          script: |
             docker images  
             docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}  
-            docker run -d -p 80:80 nginx:alpine
+            docker run -d -p 80:80 ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }} 
             docker ps -a
