@@ -36,19 +36,8 @@ jobs:
           script: | 
              cd test-cicd-firsttime/
              docker images
-        
-  deploy:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set env
-        run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
-
-      - uses: appleboy/ssh-action@master
-        name: Login and Deploy execute command ssh to remote server
+              - uses: appleboy/ssh-action@master
+      - name: Login and Deploy execute command ssh to remote server
         with:
          host: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
@@ -57,5 +46,16 @@ jobs:
             pwd
             docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}
             docker images
-            docker run -d -p 80:80 test-cicd-firsttime:${{ env.ENV_NAME }}
+            docker run -p 80:80 test-cicd-firsttime:${{ env.ENV_NAME }}
             docker ps -a
+#   deploy:
+#       needs: build
+#       runs-on: ubuntu-latest
+#       steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+      
+#       - name: Set env
+#         run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
+
+
