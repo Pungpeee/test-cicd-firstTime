@@ -55,8 +55,8 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            cd test-cicd-firsttime
-            pwd
             docker images
-            docker run -p 80:80 nginx:alpine
+            docker rm -f test-cicd-firsttime:${{ env.ENV_NAME }}  
+            docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}  
+            docker run -d -p 80:80 test-cicd-firsttime:${{ env.ENV_NAME }}
             docker ps -a
