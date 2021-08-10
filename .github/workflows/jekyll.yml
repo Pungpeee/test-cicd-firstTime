@@ -36,8 +36,9 @@ jobs:
           script: | 
              cd test-cicd-firsttime/
              docker images
-              - uses: appleboy/ssh-action@master
+              
       - name: Login and Deploy execute command ssh to remote server
+        uses: appleboy/ssh-action@master
         with:
          host: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
