@@ -44,7 +44,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            docker pull image-for-testcicd 
+            docker pull ghcr.io/pungpeee/image-for-testcicd  
             docker images
-            docker run -d -p 80:80 image-for-testcicd  
+            docker run -d -p 80:80 ghcr.io/pungpeee/image-for-testcicd    
             docker ps -a
