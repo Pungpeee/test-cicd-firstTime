@@ -11,9 +11,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Set env
-        run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
-      
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
@@ -30,7 +27,7 @@ jobs:
         with:
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}        
+          tags: image-for-testcicd       
               
 
   deploy:
@@ -39,10 +36,7 @@ jobs:
       steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set env
-        run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo ${GITHUB_REF##*/} )" >> $GITHUB_ENV
-      
-      
+ 
       - name: Login and Deploy execute command ssh to remote server
         uses: appleboy/ssh-action@master
         with:
@@ -50,7 +44,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-            docker pull ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }}  
+            docker pull image-for-testcicd 
             docker images
-            docker run -d -p 80:80 ghcr.io/pungpeee/test-cicd-firsttime:${{ env.ENV_NAME }} 
+            docker run -d -p 80:80 image-for-testcicd  
             docker ps -a
