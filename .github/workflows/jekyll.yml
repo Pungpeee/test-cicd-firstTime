@@ -27,7 +27,7 @@ jobs:
         with:
           file: ./Dockerfile
           push: true
-          tags: image-for-testcicd       
+          tags: ghcr.io/image-for-testcicd       
               
 
   deploy:
